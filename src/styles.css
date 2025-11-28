@@ -1,9 +1,9 @@
 :root {
-  --color-primary: #003366;
-  --color-accent: #0077cc;
-  --color-highlight: #f46a6a;
-  --color-text: #333333;
-  --color-bg: #ffffff;
+  --color-primary: #6b7280; /* gray-600 */
+  --color-accent: #8b5cf6; /* soft purple */
+  --color-highlight: #fb7185; /* pink accent */
+  --color-text: #172554; /* deep navy for text */
+  --color-bg: #f8fafc; /* very light background */
   --font-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -17,34 +17,221 @@ body {
 
 /* Exemplo de estilos para header/navigation/hero etc */
 .header {
-  background-color: var(--color-primary);
-  color: white;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   padding: 1.5rem;
   text-align: center;
+}
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255,255,255,0.9);
+  border-bottom: 1px solid rgba(15,23,42,0.04);
+}
+.brand {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 1.15rem;
 }
 .navigation {
-  background-color: var(--color-accent);
-  text-align: center;
-  padding: 1rem 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
-.navigation a {
-  color: white;
-  margin: 0 1rem;
+.navigation .nav-link {
+  color: var(--color-primary);
   text-decoration: none;
-  font-weight: bold;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
 }
-.hero {
-  background-color: #f4f4f4;
+.navigation .nav-link:hover {
+  background: rgba(139,92,246,0.08);
+}
+.brand-hero {
+  background-color: var(--color-bg);
   text-align: center;
-  padding: 5rem 1.5rem;
+  padding: 2.25rem 1rem 0.5rem;
 }
-.hero h2 {
-  font-size: 2.5rem;
+.brand-hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3.5rem 1rem;
+  text-align: center;
+}
+.brand-badge {
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.6px;
+}
+.brand-title {
+  font-size: 2.25rem;
+  margin: 0.5rem 0;
   color: var(--color-primary);
 }
-.services .service {
-  background: #e9f3fb;
-  padding: 1.5rem;
-  border-left: 5px solid var(--color-highlight);
+.brand-tagline {
+  color: #475569;
+  margin-bottom: 1rem;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
-/* ... e assim por diante */
+.hero-ctas {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+.btn-primary {
+  background: var(--color-accent);
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  padding: 0.55rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid rgba(23,37,84,0.06);
+  text-decoration: none;
+}
+
+/* brand logo in topbar */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 1.15rem;
+}
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  display: block;
+  border-radius: 8px;
+}
+.products h2 {
+  margin: 0 0 1rem 0;
+  color: var(--color-primary);
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.product-card {
+  background: white;
+  border-radius: 10px;
+  padding: 0.75rem;
+  box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.product-card h3 {
+  margin: 0.5rem 0 0.25rem;
+  color: var(--color-text);
+}
+.product-card p {
+  margin: 0.25rem 0;
+  color: #475569;
+}
+.product-card a {
+  margin-top: 0.5rem;
+  display: inline-block;
+  background: var(--color-accent);
+  color: white;
+  padding: 0.45rem 0.6rem;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+/* Login page styles */
+.login-page {
+  max-width: 420px;
+  margin: 4rem auto;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.06);
+  text-align: center;
+}
+.login-page h2 { color: var(--color-primary); margin-bottom: 1rem; }
+.login-page button {
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.login-page p { color: #475569; margin-top: 0.8rem; }
+
+/* Profile page styles */
+.profile-page {
+  max-width: 520px;
+  margin: 3.5rem auto;
+  background: white;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.06);
+}
+.profile-page h2 { color: var(--color-primary); margin-bottom: 0.5rem; }
+.profile-page p { color: #475569; margin: 0.4rem 0; }
+.profile-page img { border-radius: 50%; margin-top: 0.6rem; }
+.profile-page button {
+  margin-top: 1rem;
+  background: transparent;
+  border: 1px solid rgba(23,37,84,0.08);
+  padding: 0.45rem 0.7rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Product page */
+.product-page {
+  max-width: 900px;
+  margin: 3rem auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding: 0 1rem 4rem;
+}
+.product-page img {
+  width: 100%;
+  border-radius: 10px;
+}
+.product-info h2 { color: var(--color-primary); }
+.product-info p { color: #475569; }
+.product-info button {
+  margin-top: 1rem;
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .product-page { grid-template-columns: 1fr; }
+  .navigation { right: 12px; top: 12px; }
+  .product-card img { height: 160px; }
+}

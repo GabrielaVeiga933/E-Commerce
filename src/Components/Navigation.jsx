@@ -1,11 +1,30 @@
+import { Link } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
+
+const STORE_NAME = "Beleza Clara";
+
 function Navigation() {
+  const { user } = useAuth();
+
   return (
-    <nav className="navigation">
-      <a href="#sobre">Sobre</a>
-      <a href="#serviços">Serviços</a>
-      <a href="#resultados">Resultados</a>
-      <a href="#contato">Contato</a>
-    </nav>
+    <header className="topbar">
+      <div className="brand">
+        <img src="/logo.svg" alt="Beleza Clara" className="brand-logo" />
+        <span className="brand-name">{STORE_NAME}</span>
+      </div>
+      <nav className="navigation">
+        <Link className="nav-link" to="/">Produtos</Link>
+        <a className="nav-link" href="#sobre">Sobre</a>
+        <a className="nav-link" href="#serviços">Serviços</a>
+        <Link className="nav-link" to="/cart">Carrinho</Link>
+        {user ? (
+          <Link className="nav-link" to="/profile">Perfil</Link>
+        ) : (
+          <Link className="nav-link" to="/login">Login</Link>
+        )}
+      </nav>
+    </header>
   );
 }
+
 export default Navigation;
