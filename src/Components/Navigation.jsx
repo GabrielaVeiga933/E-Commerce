@@ -14,8 +14,6 @@ function Navigation() {
       </div>
       <nav className="navigation">
         <Link className="nav-link" to="/">Produtos</Link>
-        <a className="nav-link" href="#sobre">Sobre</a>
-        <a className="nav-link" href="#serviços">Serviços</a>
         <Link className="nav-link" to="/cart">Carrinho</Link>
         {user ? (
           <Link className="nav-link" to="/profile">Perfil</Link>
