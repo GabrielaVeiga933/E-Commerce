@@ -9,12 +9,18 @@ function Navigation() {
   return (
     <header className="topbar">
       <div className="brand">
-        <img src="/logo.svg" alt="Beleza Clara" className="brand-logo" />
+        <img 
+          src="/logo.png" 
+          alt="Beleza Clara" 
+          className="brand-logo" 
+        />
         <span className="brand-name">{STORE_NAME}</span>
       </div>
+
       <nav className="navigation">
         <Link className="nav-link" to="/">Produtos</Link>
         <Link className="nav-link" to="/cart">Carrinho</Link>
+
         {user ? (
           <Link className="nav-link" to="/profile">Perfil</Link>
         ) : (
