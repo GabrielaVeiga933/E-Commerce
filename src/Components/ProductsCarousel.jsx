@@ -5,16 +5,25 @@ import products from "../data/products";
 
 const ProductsCarousel = () => {
   return (
-    <Carousel fade interval={4000} pause={false}>
+    <Carousel
+      className="custom-rb-carousel"
+      fade
+      interval={4000}
+      pause={false}
+      indicators
+      controls
+    >
       {products.map((p) => (
         <Carousel.Item key={p.id}>
-          <img
-            className="d-block w-100"
-            src={p.image}
-            alt={p.name}
-          style={{ objectFit: "cover", height: "900px", width: "800px" }}
+   
+          <div className="product-card">
+            <img
+              src={p.image}
+              alt={p.name}
+              loading="lazy"
+            />
+          </div>
 
-          />
           <Carousel.Caption className="bg-dark bg-opacity-50 p-2 rounded">
             <h5>{p.name}</h5>
             <p>{p.description}</p>

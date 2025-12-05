@@ -30,7 +30,6 @@ export default function Profile() {
       const current = auth.currentUser;
       if (!current) throw new Error("Usuário não disponível");
 
-    
       if (form.name !== current.displayName) {
         await updateProfile(current, { displayName: form.name });
       }
@@ -39,7 +38,6 @@ export default function Profile() {
         await updateEmail(current, form.email);
       }
 
-      
       if (form.phone) localStorage.setItem(`phone_${current.uid}`, form.phone);
       if (form.address) localStorage.setItem(`address_${current.uid}`, form.address);
 

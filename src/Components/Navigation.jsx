@@ -5,7 +5,6 @@ const STORE_NAME = "Beleza Clara";
 
 function Navigation() {
   const { user } = useAuth();
-
   return (
     <header className="topbar">
       <div className="brand">
@@ -16,7 +15,6 @@ function Navigation() {
         />
         <span className="brand-name">{STORE_NAME}</span>
       </div>
-
       <nav className="navigation">
         <Link className="nav-link" to="/">Produtos</Link>
         <Link className="nav-link" to="/cart">Carrinho</Link>
