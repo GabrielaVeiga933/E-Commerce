@@ -1,7 +1,7 @@
 // src/Components/ProductsCarousel.jsx
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-import products from "../data/products";
+import products from "../../data/products";
 
 const ProductsCarousel = () => {
   return (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../Context/AuthContext";
-import { auth } from "../firebase";
+import { useAuth } from "../../Context/AuthContext";
+import { auth } from "../../firebase";
 import { updateProfile, updateEmail } from "firebase/auth";
 
 export default function Profile() {

@@ -1,7 +1,7 @@
 import React from "react";
-import products from "../data/products";
+import products from "../../data/products";
 import { Link } from "react-router-dom";
-import ProductsCarousel from "../Components/ProductsCarousel";
+import ProductsCarousel from "../../Components/ProductsCarousel/ProductsCarousel";
 
 function ProductCard({ p }) {
   return (

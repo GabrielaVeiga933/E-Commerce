@@ -1,29 +1,17 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import "./styles.css";
-import Navigation from "./Components/Navigation";
+import Header from "./header/Navigation";
 import { CartProvider } from "./Context/CartContext";
-import Home from "./Pages/Home";
-import ProductPage from "./Pages/ProductPage";
-import Cart from "./Pages/Cart";
-import Checkout from "./Pages/Checkout";
-import Login from "./Pages/Login";
-import Profile from "./Pages/Profile";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
     <BrowserRouter>
       <CartProvider>
         <div className="App">
-          <Navigation />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} />
-          </Routes>
+          <Header />
+          <AppRoutes />
         </div>
       </CartProvider>
     </BrowserRouter>
