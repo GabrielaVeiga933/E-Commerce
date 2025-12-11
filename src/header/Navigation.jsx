@@ -17,6 +17,7 @@ function Navigation() {
       </div>
       <nav className="navigation">
         <Link className="nav-link" to="/">Produtos</Link>
+        <Link className="nav-link" to="/Produto">Cadastrar Produto</Link>
         <Link className="nav-link" to="/cart">Carrinho</Link>
 
         {user ? (
