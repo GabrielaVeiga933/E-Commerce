@@ -1,57 +1,39 @@
 import { useState } from "react";
-import { db } from "../../firebase";
+
 import { collection, addDoc } from "firebase/firestore";
 import { Container, Form, Button, Alert, Spinner } from "react-bootstrap";
+import { createProduct } from "../../firebase";
+
 
 function Produto() {
-  // Estado do formulário (unificado)
-  const [form, setForm] = useState({
-    nome: "",
-    descricao: "",
-    preco: "",
-    quantidade: ""
-  });
-
+  const [form, setForm] = useState({ nome: "", descricao: "", preco: "", quantidade: "" });
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState(null); // { type: 'success'|'danger', text: '...' }
+  const [message, setMessage] = useState(null);
 
-  // Atualiza campo do formulário
   function handleChange(e) {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
   }
 
-  // Envio do formulário: cadastra no Firestore
   async function handleSubmit(e) {
     e.preventDefault();
     setMessage(null);
     setLoading(true);
 
     try {
-      // Monta objeto com tipos corretos
       const produtoData = {
         nome: form.nome.trim(),
         descricao: form.descricao.trim(),
         preco: parseFloat(form.preco) || 0,
         quantidade: parseInt(form.quantidade, 10) || 0,
-        criadoEm: new Date()
       };
 
-      const docRef = await addDoc(collection(db, "produtos"), produtoData);
-
-      setMessage({
-        type: "success",
-        text: `Produto cadastrado com sucesso! ID: ${docRef.id}`
-      });
-
-      // Reseta formulário
+      const id = await createProduct(produtoData); // usa a função do firebase.js
+      setMessage({ type: "success", text: `Produto cadastrado com sucesso! ID: ${id}` });
       setForm({ nome: "", descricao: "", preco: "", quantidade: "" });
-    } catch (error) {
-      console.error("Erro ao cadastrar produto:", error);
-      setMessage({
-        type: "danger",
-        text: `Erro ao cadastrar produto: ${error.message}`
-      });
+    } catch (err) {
+      console.error("Erro ao cadastrar:", err);
+      setMessage({ type: "danger", text: `Erro ao cadastrar produto: ${err.message}` });
     } finally {
       setLoading(false);
     }
