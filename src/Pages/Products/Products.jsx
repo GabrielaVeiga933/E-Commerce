@@ -19,16 +19,19 @@ function ProductCard({ p }) {
           variant="top"
           src={image}
           alt={name}
-          style={{ objectFit: "cover", height: 180 }}
         />
       ) : (
         <div
           style={{
-            height: 180,
+            height: 220,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background: "rgba(255,255,255,0.02)"
+            background: "rgba(255,255,255,0.02)",
+            borderRadius: 12,
+            marginBottom: "1.1rem",
+            color: "#fff",
+            fontWeight: 600
           }}
         >
           Sem imagem
@@ -36,10 +39,10 @@ function ProductCard({ p }) {
       )}
       <Card.Body className="d-flex flex-column">
         <Card.Title>{name}</Card.Title>
-        <Card.Text className="flex-grow-1" style={{ color: "rgba(212,175,55,0.9)" }}>
+        <Card.Text className="flex-grow-1">
           {description}
         </Card.Text>
-        <div className="d-flex justify-content-between align-items-center">
+        <div className="d-flex justify-content-between align-items-center mt-2">
           <strong>R$ {Number(price).toFixed(2)}</strong>
           <Link to={`/product/${p.id}`} className="btn btn-primary btn-sm">
             Ver produto
@@ -121,7 +124,7 @@ export default function Products() {
 
       <Row className="product-grid g-3">
         {products.map((p) => (
-          <Col key={p.id} xs={12} sm={6} md={4}>
+          <Col key={p.id} xs={12} sm={6} md={4} lg={3}>
             <ProductCard p={p} />
           </Col>
         ))}

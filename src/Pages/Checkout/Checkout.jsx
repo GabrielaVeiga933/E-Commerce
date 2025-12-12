@@ -1,10 +1,11 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useCart } from "../../Context/CartContext";
 import { Link } from "react-router-dom";
 
 export default function Checkout() {
   const { cartItems, total } = useCart();
+  const [success, setSuccess] = useState(false);
 
   if (!cartItems.length)
     return (
@@ -16,19 +17,30 @@ export default function Checkout() {
       </div>
     );
 
+  if (success) {
+    return (
+      <div className="checkout-success-message">
+        <div className="checkout-success-card">
+          <h2>Pedido realizado com sucesso!</h2>
+          <p>Obrigado por comprar conosco 💙</p>
+          <Link to="/" className="btn btn-primary mt-3">Voltar para a loja</Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="checkout container mt-4">
+    <div className="checkout-form-card">
       <h2>Finalizar Compra</h2>
-      <p>O total do seu pedido é: <strong>R$ {total.toFixed(2)}</strong></p>
-      
-      <Link to="/cart" className="btn btn-secondary mt-3">
-        Voltar para o Carrinho
-      </Link>
-      
-  
-      <button className="btn btn-success mt-3 ms-3" onClick={() => alert('Simulação de Finalização de Pedido!')}>
-        Confirmar Pagamento 
-      </button>
+      <p className="checkout-total">O total do seu pedido é: <strong>R$ {total.toFixed(2)}</strong></p>
+      <div className="checkout-actions">
+        <Link to="/cart" className="btn btn-secondary">
+          Voltar para o Carrinho
+        </Link>
+        <button className="btn btn-primary" onClick={() => setSuccess(true)}>
+          Confirmar Pagamento
+        </button>
+      </div>
     </div>
   );
 }
