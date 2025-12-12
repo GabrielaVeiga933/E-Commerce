@@ -1,19 +1,53 @@
 import { useState } from "react";
-
-import { collection, addDoc } from "firebase/firestore";
-import { Container, Form, Button, Alert, Spinner } from "react-bootstrap";
+import { Container, Form, Button, Alert, Spinner, Image } from "react-bootstrap";
 import { createProduct } from "../../firebase";
 
-
 function Produto() {
-  const [form, setForm] = useState({ nome: "", descricao: "", preco: "", quantidade: "" });
+  const [form, setForm] = useState({ nome: "", preco: "", quantidade: "", image: "" });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
+  const [uploadedFileName, setUploadedFileName] = useState("");
+  const [preview, setPreview] = useState(null); // data URL para mostrar preview
 
+  // Atualiza campos do formulário
   function handleChange(e) {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
   }
+
+  // Função de upload: valida e converte para base64
+  const handleFileUpload = (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+
+    // Validar tipo (apenas imagens)
+    if (!file.type.startsWith("image/")) {
+      setMessage({ type: "danger", text: "Por favor, selecione apenas arquivos de imagem." });
+      return;
+    }
+
+    // Validar tamanho (máx 5MB)
+    const MAX_BYTES = 5 * 1024 * 1024;
+    if (file.size > MAX_BYTES) {
+      setMessage({ type: "danger", text: "A imagem deve ter no máximo 5MB." });
+      return;
+    }
+
+    // Ler o arquivo e armazenar como base64
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64 = reader.result;
+      setForm(prev => ({ ...prev, image: base64 }));
+      setUploadedFileName(file.name);
+      setPreview(base64);
+      setMessage({ type: "success", text: "Imagem carregada com sucesso!" });
+    };
+    reader.onerror = () => {
+      setMessage({ type: "danger", text: "Erro ao ler o arquivo. Tente novamente." });
+    };
+
+    reader.readAsDataURL(file);
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,14 +57,17 @@ function Produto() {
     try {
       const produtoData = {
         nome: form.nome.trim(),
-        descricao: form.descricao.trim(),
+        image: form.image || "", // base64 ou string vazia
+
         preco: parseFloat(form.preco) || 0,
         quantidade: parseInt(form.quantidade, 10) || 0,
       };
 
       const id = await createProduct(produtoData); // usa a função do firebase.js
       setMessage({ type: "success", text: `Produto cadastrado com sucesso! ID: ${id}` });
-      setForm({ nome: "", descricao: "", preco: "", quantidade: "" });
+      setForm({ nome: "",  preco: "", quantidade: "", image: "" });
+      setUploadedFileName("");
+      setPreview(null);
     } catch (err) {
       console.error("Erro ao cadastrar:", err);
       setMessage({ type: "danger", text: `Erro ao cadastrar produto: ${err.message}` });
@@ -58,6 +95,22 @@ function Produto() {
           />
         </Form.Group>
 
+        <Form.Group className="mb-3" controlId="formImage">
+          <Form.Label>Imagem (opcional)</Form.Label>
+          <Form.Control
+            name="image"
+            type="file"
+            accept="image/*"
+            onChange={handleFileUpload}
+          />
+          {uploadedFileName && <small className="text-muted">Arquivo: {uploadedFileName}</small>}
+          {preview && (
+            <div style={{ marginTop: 10 }}>
+              <Image src={preview} alt="preview" thumbnail style={{ maxWidth: 180 }} />
+            </div>
+          )}
+        </Form.Group>
+
         <Form.Group className="mb-3" controlId="formQuantidade">
           <Form.Label>Quantidade em estoque</Form.Label>
           <Form.Control
@@ -81,19 +134,6 @@ function Produto() {
             onChange={handleChange}
             step="0.01"
             min="0"
-            required
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formDescricao">
-          <Form.Label>Descrição</Form.Label>
-          <Form.Control
-            name="descricao"
-            as="textarea"
-            rows={3}
-            placeholder="Descreva o produto..."
-            value={form.descricao}
-            onChange={handleChange}
             required
           />
         </Form.Group>
