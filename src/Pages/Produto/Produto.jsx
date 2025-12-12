@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Form, Button, Alert, Spinner, Image } from "react-bootstrap";
+import { Form, Button, Alert, Spinner, Image } from "react-bootstrap";
 import { createProduct } from "../../firebase";
 
 function Produto() {
@@ -77,7 +77,7 @@ function Produto() {
   }
 
   return (
-    <Container className="my-5">
+    <div className="cadastro-produto-container">
       <h1>Cadastro de Produto</h1>
 
       {message && <Alert variant={message.type}>{message.text}</Alert>}
@@ -105,8 +105,8 @@ function Produto() {
           />
           {uploadedFileName && <small className="text-muted">Arquivo: {uploadedFileName}</small>}
           {preview && (
-            <div style={{ marginTop: 10 }}>
-              <Image src={preview} alt="preview" thumbnail style={{ maxWidth: 180 }} />
+            <div className="image-preview">
+              <Image src={preview} alt="preview" thumbnail />
             </div>
           )}
         </Form.Group>
@@ -155,7 +155,7 @@ function Produto() {
           )}
         </Button>
       </Form>
-    </Container>
+    </div>
   );
 }
 
