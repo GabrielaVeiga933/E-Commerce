@@ -1,8 +1,8 @@
-// src/Pages/Products/Products.jsx
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, Row, Col, Spinner, Alert } from "react-bootstrap";
-import { db } from "../../firebase"; // certifique-se que exporta `db`
+import { db } from "../../firebase"; 
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import ProductsCarousel from "../../Components/ProductsCarousel/ProductsCarousel";
 

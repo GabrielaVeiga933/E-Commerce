@@ -44,3 +44,4 @@ export async function createProduct(productData) {
   });
   return docRef.id;
 }
+
